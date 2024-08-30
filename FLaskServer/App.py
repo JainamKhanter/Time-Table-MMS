@@ -11,7 +11,7 @@ from crud import create_course, get_all_courses, update_course, delete_course
 app = Flask(__name__)
 CORS(app)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://avnadmin:AVNS_uAxdYHmnlNwUp4Fmx5E@time-table-time-table-management.h.aivencloud.com:22885/defaultdb'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://JainamCitl:jainam98@localhost/timetable'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://JainamCitl:jainam98@localhost/timetable'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'jk48dj37bk44nk007'  # Replace with a strong secret key
