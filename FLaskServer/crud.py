@@ -6,8 +6,7 @@ from models import db, Faculty, Student, Course
 
 def create_faculty(username, email, department):
     new_faculty = Faculty(username=username, email=email, department=department)
-    if new_faculty not in Faculty:
-        db.session.add(new_faculty)
+    db.session.add(new_faculty)
     db.session.commit()
     return new_faculty
 

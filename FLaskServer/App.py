@@ -10,8 +10,8 @@ from crud import create_course, get_all_courses, update_course, delete_course
 
 app = Flask(__name__)
 CORS(app)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://avnadmin:AVNS_uAxdYHmnlNwUp4Fmx5E@time-table-time-table-management.h.aivencloud.com:22885/defaultdb'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://JainamCitl:jainam98@localhost/timetable'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://avnadmin:AVNS_uAxdYHmnlNwUp4Fmx5E@time-table-time-table-management.h.aivencloud.com:22885/defaultdb'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://JainamCitl:jainam98@localhost/timetable'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'jk48dj37bk44nk007'  # Replace with a strong secret key
@@ -29,11 +29,11 @@ from werkzeug.security import generate_password_hash
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
-    print(data)
+    # print(data)
     username = data.get('username')
     password = data.get('password')
     user_type = data.get('type')
-    print(user_type)
+    # print(user_type)
     if User.query.filter_by(username=username).first():
         return jsonify({'message': 'User already exists'}), 409
 
@@ -48,11 +48,11 @@ def signup():
     access_token = create_access_token(identity={'username': new_user.username})  
     db.session.add(new_user)
     db.session.commit()
-    students = get_all_students()
-    for stu in students:
-        print(stu.username)
+    # students = get_all_students()
+    # for stu in students:
+    #     print(stu.username)
     
-    return jsonify({'access_token': access_token, 'type':new_user.type,'id':student.id}), 201
+    return jsonify({'access_token': access_token, 'type':new_user.type,'id':student.id, 'username':new_user.username}), 200
 
 from werkzeug.security import check_password_hash
 
@@ -82,7 +82,7 @@ def login():
 
     if user and check_password_hash(user.password, password):
         access_token = create_access_token(identity={'username': user.username})  
-        return jsonify({'access_token': access_token, 'type':user.type,'id':student.id}), 200
+        return jsonify({'access_token': access_token, 'type':user.type,'id':student.id, 'username':user.username}), 200
 
     return jsonify({'message': 'Invalid credentials'}), 401
 
